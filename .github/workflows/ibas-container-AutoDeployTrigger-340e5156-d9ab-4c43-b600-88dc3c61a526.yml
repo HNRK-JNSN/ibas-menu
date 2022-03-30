@@ -35,7 +35,7 @@ jobs:
         with:
           push: true
           tags: ibastestregistry.azurecr.io/ibas-container:${{ github.sha }}
-          context: ./
+          context: ./Dockerfile
 
 
   deploy:
