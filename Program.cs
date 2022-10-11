@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Configuration.AddEnvironmentVariables(prefix:"IBASMENU_");
 
 var app = builder.Build();
 

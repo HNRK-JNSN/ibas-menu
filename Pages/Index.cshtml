@@ -3,26 +3,24 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@using IBAS.MenuApp.Model
 
 <div class="text-center">
-    <h1 class="display-4">IBAS Køkken Menu: Uge 10</h1>
+    <h1 class="display-4">IBAS Kantinen</h1>
     <div class="row justify-content-center">
         <div class="col-auto">
             <table class="table table-responsive">
                 <th>Ugedag</th><th>Varm ret</th><th>Kold ret</th>
-                <tr><td>Mandag</td> <td>Spegetti</td> <td>Rugbrød</td></tr>
-                <tr><td>Tirsdag</td> <td>Millionbøf</td> <td>Rugbrød</td></tr>
-                <tr><td>Onsdag</td> <td>Suppe</td> <td>Rugbrød</td></tr>
-                <tr><td>Torsdag</td> <td>Fisk</td> <td>Rugbrød</td></tr>
-                <tr><td>Fredag</td> <td>Surprise</td> <td>Rugbrød</td></tr>
+                @foreach (MenuItemDTO item in Model.MenuItems)
+                {
+                    <tr>
+                        <td>@item.DOW</td>
+                        <td>@item.WarmDish</td>
+                        <td>@item.ColdDish</td>
+                    </tr>
+                }
             </table>
         </div>
     </div>
 </div>
 
-<div class="text-center">
-    <h3>Kontakt</h3>
-    <p>Karen Koch Andersen</p>
-    <p>kka@ibas.dk</p>
-    <p>Tlf: 83467292</p>
-</div>
