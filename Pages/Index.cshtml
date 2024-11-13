@@ -1,16 +1,16 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "IBAS Cantine Menu";
 }
 @using IBAS.MenuApp.Model
 
 <div class="text-center">
-    <h1 class="display-4">IBAS Kantinen</h1>
+    <h1 class="display-4">IBAS Cantine</h1>
     <div class="row justify-content-center">
         <div class="col-auto">
             <table class="table table-responsive">
-                <th>Ugedag</th><th>Varm ret</th><th>Kold ret</th>
+                <th>DOW</th><th>Warm dish</th><th>Cold dish</th>
                 @foreach (MenuItemDTO item in Model.MenuItems)
                 {
                     <tr>
