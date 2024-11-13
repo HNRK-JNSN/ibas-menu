@@ -103,3 +103,50 @@ public void OnGet()
     this.MenuItems = _tableClient.Query<MenuItemDTO>();
 }
 ```
+
+---
+
+## 7. Ny web app til dynamicmenu branch
+
+Opret en ny webapp i den eksisterende plan, og tilknyt den til den nye branch.
+
+``` bash
+export RESGRP=IBASMenuRG
+export WEBAPPPLAN=ibas-menu-webapp-26375
+export WEBAPPNAME=ibas-menu-webapp-26375-Dynamic
+export GITHUBREPO="https://github.com/HNRK-JNSN/ibas-menu.git"
+
+az webapp create --name $WEBAPPNAME --resource-group $RESGRP \
+--plan $WEBAPPPLAN --runtime "DOTNETCORE:8.0"
+
+az webapp deployment source config \
+--name $WEBAPPNAME --resource-group $RESGRP \
+--repository-type github --repo-url  $GITHUBREPO \
+--branch dynamicmenu
+```
+
+---
+
+# 8. Tilføj ConnectionString 
+
+Find nu den nye WebApp i portalen og under `Settings`-->`Environment variables` find fanebladet `Connection strings` og vælg `+ Add`-knappen øverst.
+Den connectionString som vi skal bruge i koden skal navngives `AzureStorage` og værdien er selvfølgig den connectionString som passer til din konto.
+Sæt den til typen `Custom`fra dropdown menuen.
+
+Vælg `Apply`og `Apply`igen for at gemme miljø variablen.
+
+---
+
+# 9. Afprøv den ny app.
+
+---
+
+# 10. Service Connector
+
+Ønsker du at oprette en service connector kan du køre følgende kommando:
+
+```bash
+ az webapp connection create storage-table -g $RESGRP -n $WEBAPPNAME --tg $RESGRP --account ibaskantinestorage7788 --system-identity
+```
+
+Hint: læs artiklen [](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-storage-table?tabs=dotnet)
