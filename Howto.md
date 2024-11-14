@@ -149,4 +149,6 @@ Vælg `Apply`og `Apply`igen for at gemme miljø variablen.
  az webapp connection create storage-table -g $RESGRP -n $WEBAPPNAME --tg $RESGRP --account ibaskantinestorage7788 --system-identity
 ```
 
-Hint: læs artiklen [](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-storage-table?tabs=dotnet)
+Hint: læs artiklen [Integrate Azure Table Storage with Service Connector](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-storage-table?tabs=dotnet)
+
+---
