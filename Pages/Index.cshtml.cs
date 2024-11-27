@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Azure;
 using Azure.Data.Tables;
+using Azure.Identity;
 using IBAS.MenuApp.Model;
 
 namespace IBAS_menu.Pages;
@@ -18,19 +19,24 @@ public class IndexModel : PageModel
     {
         _logger = logger;
         
-        var connectionString = config.GetConnectionString("AzureStorage");
+        var tableEndpoint = Environment.GetEnvironmentVariable("AZURE_STORAGETABLE_RESOURCEENDPOINT");
 
-        if (string.IsNullOrEmpty(connectionString))
+        if (string.IsNullOrEmpty(tableEndpoint))
         {
-            logger.LogCritical("Connection string is empty.");
+            logger.LogCritical("No Endpoint found.");
             return;
         }
 
+        var credential = new DefaultAzureCredential();
+
         try {
-            this._tableClient = new TableClient(
-                connectionString,
-                "MenuTable"
+            var client = new TableServiceClient(
+                new Uri(tableEndpoint),
+                credential
             );
+
+            this._tableClient = client.GetTableClient("MenuTable");
+
         } catch (Exception ex)
         {
             logger.LogCritical(ex, "Could not connect to storage.");
