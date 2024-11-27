@@ -10,7 +10,7 @@ public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
 
-    public Pageable<MenuItemDTO> MenuItems {get; set;}
+    public Pageable<MenuItemDTO>? MenuItems {get; set;}
 
     private TableClient? _tableClient;
 
